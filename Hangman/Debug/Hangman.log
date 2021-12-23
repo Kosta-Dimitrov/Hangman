@@ -3,7 +3,7 @@ C:\Users\DELL\Desktop\Hangman\Hangman\Hangman.cpp(43,23): warning C4018: '<': si
 C:\Users\DELL\Desktop\Hangman\Hangman\Hangman.cpp(60,22): warning C4018: '<': signed/unsigned mismatch
 C:\Users\DELL\Desktop\Hangman\Hangman\Hangman.cpp(68,23): warning C4018: '<': signed/unsigned mismatch
 C:\Users\DELL\Desktop\Hangman\Hangman\Hangman.cpp(90,25): warning C4018: '<': signed/unsigned mismatch
-C:\Users\DELL\Desktop\Hangman\Hangman\Hangman.cpp(211,20): warning C4018: '<': signed/unsigned mismatch
-C:\Users\DELL\Desktop\Hangman\Hangman\Hangman.cpp(234,20): warning C4018: '<': signed/unsigned mismatch
-C:\Users\DELL\Desktop\Hangman\Hangman\Hangman.cpp(257,20): warning C4018: '<': signed/unsigned mismatch
+C:\Users\DELL\Desktop\Hangman\Hangman\Hangman.cpp(217,20): warning C4018: '<': signed/unsigned mismatch
+C:\Users\DELL\Desktop\Hangman\Hangman\Hangman.cpp(240,20): warning C4018: '<': signed/unsigned mismatch
+C:\Users\DELL\Desktop\Hangman\Hangman\Hangman.cpp(263,20): warning C4018: '<': signed/unsigned mismatch
   Hangman.vcxproj -> C:\Users\DELL\Desktop\Hangman\Debug\Hangman.exe

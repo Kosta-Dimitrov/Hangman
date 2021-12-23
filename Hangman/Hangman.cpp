@@ -15,7 +15,7 @@ int attempts = 5;
 vector<string> dictionary;
 
 void loadWords();
-void changeAttempts();
+void changeAttempts(int attempts);
 void clearConsole();
 void changeWordLength(const int& length);
 bool isValidNumber(const string& str);
@@ -35,7 +35,7 @@ int main()
 	while (true)
 	{
 		cin >> command;
-		if (command == "s")
+		if (command == "start")
 		{
 			string wordToGuess;
 			if (wordLength != 0)
@@ -132,9 +132,15 @@ int main()
 				printMenu();
 			}
 		}
-		else if (command == "c")
+		else if (command == "change")
 		{
-			changeAttempts();
+			int newAttempts;
+			do
+			{
+				cout << "New attempts(between 2 and 9):";
+				cin >> newAttempts;
+			} while (newAttempts<2||newAttempts>9);
+			changeAttempts(newAttempts);
 		}
 		else if (isValidNumber(command))
 		{
@@ -148,7 +154,7 @@ int main()
 				changeWordLength(newWordLength);
 			}
 		}
-		else if (command == "e")
+		else if (command == "exit")
 		{
 			break;
 		}
@@ -184,9 +190,9 @@ void loadWords()
 	}
 	file.close();
 }
-void changeAttempts()
+void changeAttempts(int newAttempts)
 {
-	attempts = attempts == 5 ? 7 : 5;
+	attempts = newAttempts;
 	cout << "You successfully changed your attempts to " << attempts << endl;
 }
 void clearConsole()
@@ -245,10 +251,10 @@ void printMenu()
 {
 	cout << "=====================================" << endl;
 	cout << "Select option :" << endl;
-	cout << "1) s to start new game" << endl;
+	cout << "1) 'start' to start new game" << endl;
 	cout << "2) 4-10 to choose word length" << endl;
-	cout << "3) c to change the number of attempts" << endl;
-	cout << "4) e to exit the game" << endl;
+	cout << "3) 'change' to change the number of attempts" << endl;
+	cout << "4) 'exit' to exit the game" << endl;
 	cout << "=====================================" << endl;
 }
 
