@@ -64,7 +64,7 @@ int main()
 			bool isGuessed = false;
 			while (attempts - currentAttempts > 0)
 			{
-				cout << "<<Attempts left: " << attempts - currentAttempts << ".Guess the word:";
+				cout << "<<Attempts left: " << attempts - currentAttempts << " .Guess the word:";
 				for (int i = 0; i < wordToGuess.size(); i++)
 				{
 					if (guessedCharacters[i] == true)
