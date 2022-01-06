@@ -24,12 +24,16 @@ bool isAlreadyEntered(char character, vector<char> characters);
 void printMenu();
 bool isWordGuessed(vector<bool> guessedCharacters);
 void waitFiveSeconds();
+void change();
+void printResult(int guessedWords);
+void wordIsGuessed(string word);
+void wordIsNotGuessed(string word);
+string randomWord();
 
 int main()
 {
 	loadWords();
 	string command;
-	vector<string> words;
 	printMenu();
 	int result = 0;
 	while (true)
@@ -38,21 +42,8 @@ int main()
 		if (command == "start")
 		{
 			string wordToGuess;
-			if (wordLength != 0)
-			{
-				for (int i = 0; i < dictionary.size(); i++)
-				{
-					if (dictionary[i].size() == wordLength)
-					{
-						words.push_back(dictionary[i]);
-					}
-				}
-				wordToGuess = words[rand() % words.size()];
-			}
-			else
-			{
-				wordToGuess = dictionary[rand() % dictionary.size()];
-			}
+			wordToGuess = randomWord();
+
 			vector<char> charactersEntered;
 			vector<bool> guessedCharacters;
 			char currentCharacter;
@@ -113,34 +104,19 @@ int main()
 				}
 			}
 			wordLength = 0;
-			words.clear();
 			if (isGuessed)
 			{
-				cout << "<<Congratulations! You guessed the word " << wordToGuess << endl;
-				cout << "Returning to menu" << endl;
-				waitFiveSeconds();
-				clearConsole();
-				printMenu();
+				wordIsGuessed(wordToGuess);
 				result++;
 			}
 			else
 			{
-				cout << "<<Sorry! You could not guessed the word " << wordToGuess << endl;
-				cout << "Returning to menu" << endl;
-				waitFiveSeconds();
-				clearConsole();
-				printMenu();
+				wordIsNotGuessed(wordToGuess);
 			}
 		}
 		else if (command == "change")
 		{
-			int newAttempts;
-			do
-			{
-				cout << "New attempts(between 2 and 9):";
-				cin >> newAttempts;
-			} while (newAttempts<2||newAttempts>9);
-			changeAttempts(newAttempts);
+			change();
 		}
 		else if (isValidNumber(command))
 		{
@@ -163,15 +139,10 @@ int main()
 			cout << "Your command was not valid.Please enter new one:"<<endl;
 		}
 	}
-	if (result==1)
-	{
-	    cout << "You guessed 1 word"<< endl;
-	}
-	else
-	{
-		cout << "You guessed "<<result<<" word"<< endl;
-	}
+
+	printResult(result);
 }
+
 void loadWords()
 {
 	ifstream file;
@@ -190,20 +161,24 @@ void loadWords()
 	}
 	file.close();
 }
+
 void changeAttempts(int newAttempts)
 {
 	attempts = newAttempts;
 	cout << "You successfully changed your attempts to " << attempts << endl;
 }
+
 void clearConsole()
 {
 	system("CLS");
 }
+
 void changeWordLength(const int& length)
 {
 	wordLength = length;
 	cout << "You successfully changed the word length to " << length << endl;
 }
+
 bool isValidNumber(const string& str)
 {
 	if (str.size() == 0)
@@ -223,6 +198,7 @@ bool isValidNumber(const string& str)
 	}
 	return true;
 }
+
 int convertToInteger(const string& str)
 {
 	int result = 0;
@@ -273,4 +249,68 @@ bool isWordGuessed(vector<bool> guessedCharacters)
 void waitFiveSeconds()
 {
 	Sleep(5000);
+}
+
+void change()
+{
+	string attempts;
+	
+	while (true)
+	{
+		cout << "New attempts(between 2 and 9):";
+	    cin >> attempts;
+		if (isValidNumber(attempts))
+		{
+			int number = convertToInteger(attempts);
+			if (number>=2&&number<=9)
+			{
+				changeAttempts(number);
+				break;
+			}
+		}
+	}
+}
+
+void printResult(int guessedWords)
+{
+	cout << "You guessed " << guessedWords << " ";
+	cout<<(guessedWords == 1 ? "word" : "words") << endl;
+}
+
+void wordIsGuessed(string word)
+{
+	cout << "<<Congratulations! You guessed the word \'" << word <<"\'" << endl;
+	cout << "Returning to menu" << endl;
+	waitFiveSeconds();
+	clearConsole();
+	printMenu();
+}
+
+void wordIsNotGuessed(string word)
+{
+	cout << "<<Sorry! You could not guessed the word \'" << word <<"\'" << endl;
+	cout << "Returning to menu" << endl;
+	waitFiveSeconds();
+	clearConsole();
+	printMenu();
+}
+
+string randomWord()
+{
+	if (wordLength != 0)
+	{
+		vector<string> words;
+		for (int i = 0; i < dictionary.size(); i++)
+		{
+			if (dictionary[i].size() == wordLength)
+			{
+				words.push_back(dictionary[i]);
+			}
+		}
+		return words[rand() % words.size()];
+	}
+	else
+	{
+		return dictionary[rand() % dictionary.size()];
+	}
 }
